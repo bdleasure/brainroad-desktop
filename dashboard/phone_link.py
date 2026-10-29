@@ -89,6 +89,16 @@ def hermes_version() -> str:
         return ""
 
 
+def webapp_supported() -> bool:
+    """Hermes' gateway-served browser workspace (the Webapp) is what the phone opens. Hermes
+    0.22.5 and earlier releases do not have it; it exists on Hermes' main channel."""
+    import importlib.util
+    try:
+        return importlib.util.find_spec("gateway.webapp_listener") is not None
+    except (ImportError, ValueError):
+        return False
+
+
 def write_private(path: Path, data: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     tmp = path.with_suffix(".tmp")
@@ -224,7 +234,7 @@ class PhoneLink:
             "webapp": {"enabled": bool(read_setting(config, "webapp.enabled")),
                        "publicUrl": read_setting(config, "webapp.public_url") or ""},
             "restartNeeded": bool(saved.get("restart_needed")),
-            "connectorHere": self._owns_lock,
+            "connectorHere": self._owns_lock, "webappSupported": webapp_supported(),
         }
         if pairing and pairing.status in {"waiting", "failed", "expired", "denied"}:
             out["pairing"] = {"status": pairing.status, "code": pairing.user_code,
@@ -407,6 +417,9 @@ class PhoneLink:
 
     # ----- pairing ---------------------------------------------------------------------
     def begin_pairing(self) -> dict:
+        if not webapp_supported():
+            raise PhoneLinkError("Phone access needs a newer Hermes with its browser workspace. "
+                                 "Hermes 0.22.5 does not include it yet.")
         if self.saved().get("device_id"):
             raise PhoneLinkError("This computer is already connected. Disconnect it first.")
         conflict = self._webapp_conflict()

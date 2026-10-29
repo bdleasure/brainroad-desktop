@@ -81,7 +81,7 @@ function diagnostics(status, model) {
     `BrainRoad plugin ${status.version}`,
     `Hermes ${status.hermes || 'unknown'}`,
     `Computer: ${status.computer.os} ${status.computer.arch}`,
-    `Model: ${model || 'not chosen'}`,
+    `Composer model: ${model || 'not chosen'}`,
     `Phone link: ${phoneSummary(status).label}${status.detail ? ' (' + status.detail + ')' : ''}`
   ].join('\n')
 }
@@ -236,6 +236,20 @@ function PhoneLink({ ctx, status, refresh, setStatus }) {
         ]
       })
     )
+  } else if (!status.paired && !status.webappSupported) {
+    children.push(
+      jsx(Text, {
+        children:
+          'Phone access opens Hermes’ browser workspace on this computer. Hermes ' +
+          (status.hermes || 'on this computer') +
+          ' does not include that workspace yet; it is in Hermes’ newer builds. BrainRoad will offer the connection here once your Hermes has it.'
+      }),
+      jsx(Text, {
+        muted: true,
+        children:
+          'Until then, Hermes can reach you through a messaging app you choose (Hermes → Messaging). Messages and results then pass through that service.'
+      })
+    )
   } else if (!status.paired) {
     children.push(
       jsx(Text, {
@@ -334,17 +348,12 @@ function PhoneLink({ ctx, status, refresh, setStatus }) {
 }
 
 function Choices({ status }) {
-  const model = useValue(host.state.model)
-
   return jsxs('div', {
     className: 'flex flex-col gap-2',
     children: [
       jsx(Text, {
-        children: [
-          'Model: ',
-          jsx('strong', { className: 'text-(--ui-text-primary)', children: model || 'not chosen yet' }),
-          '. You choose it in Hermes Settings → Model: a hosted provider, Nous Portal, or a model running on this computer. Tools run on this computer either way, but a hosted model receives what the agent sends it, including text from your files and web pages.'
-        ]
+        children:
+          'Your model connection is shown at the bottom of Hermes. A new Hermes starts on Nous Research’s free tier, a hosted service with limits. In Hermes Settings you can sign in to Nous, add another provider, or run a model on this computer. Tools run on this computer either way, but a hosted model receives what the agent sends it, including text from your files and web pages.'
       }),
       jsx(Text, {
         children:
@@ -355,7 +364,7 @@ function Choices({ status }) {
         children: [
           'MIT-licensed source: ',
           jsx('a', { className: 'underline', href: SOURCE, target: '_blank', rel: 'noreferrer', children: SOURCE }),
-          status ? ' · Plugin ' + status.version : ''
+          status ? ' · Plugin ' + status.version + ' · Hermes ' + (status.hermes || 'unknown') : ''
         ]
       })
     ]

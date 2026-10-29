@@ -183,6 +183,7 @@ class EchoWebapp:
 class PhoneLinkTests(unittest.TestCase):
     def setUp(self):
         self.module = load_phone_link()
+        self.module.webapp_supported = lambda: True
         self.service = FakeService()
         self.webapp = EchoWebapp()
         self.temp = tempfile.TemporaryDirectory()
@@ -278,6 +279,13 @@ class PhoneLinkTests(unittest.TestCase):
         with self.assertRaises(self.module.PhoneLinkError):
             self.link.begin_pairing()
         self.assertEqual(self.writes, [])
+
+    def test_hermes_without_the_webapp_cannot_pair(self):
+        self.module.webapp_supported = lambda: False
+        with self.assertRaises(self.module.PhoneLinkError):
+            self.link.begin_pairing()
+        self.assertFalse(self.link.status()["webappSupported"])
+        self.assertIsNone(self.service.credential_hash)
 
     def test_service_address_must_be_https_except_loopback(self):
         os.environ["BRAINROAD_URL"] = "http://brainroad.example.com"

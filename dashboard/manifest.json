@@ -2,6 +2,6 @@
   "name": "brainroad",
   "label": "BrainRoad",
   "description": "Computer help, browser work and coding on this computer, plus an optional BrainRoad phone link.",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "api": "plugin_api.py"
 }

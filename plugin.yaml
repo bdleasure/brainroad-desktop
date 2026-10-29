@@ -1,5 +1,5 @@
 name: brainroad
-version: 0.3.0
+version: 0.3.1
 requires_hermes: ">=0.22.5"
 description: "Computer help, browser work and coding on this computer, with a way back and a check that it worked. Optional BrainRoad phone link."
 author: BrainRoad

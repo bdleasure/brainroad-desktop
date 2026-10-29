@@ -7,9 +7,9 @@ Use this when someone says what they were trying to do and what went wrong. The 
 done when the thing they needed works again, not when a command succeeds.
 
 1. **Confirm the computer.** Tools run where the Hermes gateway runs. Check the operating
-   system, user and computer name with the terminal. If this is not the person's own
-   computer (a remote or cloud gateway), say so plainly and stop; never present a
-   different machine's state as theirs.
+   system, user and computer name with the terminal. A gateway on this computer is the
+   person's own computer, whatever its name. Only if it is clearly a remote server or cloud
+   machine, say so plainly and stop; never present a different machine's state as theirs.
 2. **Get the symptom in their words.** What were they doing, what happened instead, since
    when, and what changed recently. Ask one short question at a time, only when the
    answer changes what you do.
@@ -19,7 +19,11 @@ done when the thing they needed works again, not when a command succeeds.
      `Get-PrintJob`, `Get-PnpDevice`, `Get-NetAdapter`, `Test-NetConnection`,
      `Get-WinEvent`, `Get-Volume`). Open a Settings page with `Start-Process ms-settings:<page>`.
      An administrator change shows a UAC prompt that the person must approve on screen;
-     tell them first and never try to get around it.
+     tell them first and never try to get around it. A command started with
+     `Start-Process -Verb RunAs` runs in a separate window whose output you never see, so
+     record the state first (for a service, its process ID and start time), then check it
+     again after the person approves and compare. Do not ask for approval twice for the same
+     change without that check.
    - macOS: use `system_profiler`, `lpstat`, `networksetup`, `scutil`, `log show`, `df`,
      `defaults read`. Privacy-protected access (Accessibility, Screen Recording, Full Disk
      Access, Automation) must be granted by the person in System Settings; open the exact

@@ -82,11 +82,19 @@ def computer_description() -> dict[str, str]:
 
 
 def hermes_version() -> str:
+    """Hermes's own version string; a git install's package metadata says 0.0.0."""
+    try:
+        from hermes_cli import __version__
+        if __version__ and __version__ != "0.0.0":
+            return str(__version__)
+    except Exception:
+        pass
     from importlib.metadata import PackageNotFoundError, version
     try:
-        return version("hermes-agent")
+        found = version("hermes-agent")
     except PackageNotFoundError:
         return ""
+    return "" if found == "0.0.0" else found
 
 
 def webapp_supported() -> bool:

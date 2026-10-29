@@ -240,8 +240,8 @@ function PhoneLink({ ctx, status, refresh, setStatus }) {
     children.push(
       jsx(Text, {
         children:
-          'Phone access opens Hermes’ browser workspace on this computer. Hermes ' +
-          (status.hermes || 'on this computer') +
+          'Phone access opens Hermes’ browser workspace on this computer. ' +
+          (status.hermes ? 'Hermes ' + status.hermes : 'This Hermes') +
           ' does not include that workspace yet; it is in Hermes’ newer builds. BrainRoad will offer the connection here once your Hermes has it.'
       }),
       jsx(Text, {

@@ -34,7 +34,7 @@ from urllib.parse import urlsplit
 
 logger = logging.getLogger("brainroad.phone_link")
 
-VERSION = "0.2.0"
+VERSION = "0.3.0"
 DEFAULT_SERVICE = "https://app.brainroad.com"
 STATE_FILE = "phone-link.json"
 LOCK_FILE = "phone-link.lock"

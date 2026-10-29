@@ -30,7 +30,7 @@ picked in Hermes, including a model running on this computer.
 | Added | Where |
 | --- | --- |
 | Four skills: `brainroad:computer-help`, `browser-work`, `code-work`, `first-task` | `skills/` |
-| A short set of working rules in each new chat (about 1,100 characters) | `__init__.py` |
+| A short set of working rules in each new chat (about 1,200 characters) | `__init__.py` |
 | The BrainRoad page, a palette command and a phone status chip | `desktop/plugin.js` |
 | The phone link, off until you pair it | `dashboard/` |
 

@@ -1,11 +1,11 @@
 {
-  "version": "0.2.0",
+  "version": "0.3.0",
   "stage": "preview",
   "plugin": "brainroad",
   "repository": "https://github.com/bdleasure/brainroad-desktop",
   "installLink": "hermes://plugin/install?repo=bdleasure/brainroad-desktop&enable=1",
   "cliInstall": "hermes plugins install bdleasure/brainroad-desktop --enable",
-  "sourceArchive": "brainroad-desktop-source-0.2.0.zip",
+  "sourceArchive": "brainroad-desktop-source-0.3.0.zip",
   "hermes": {
     "stable": {"version": "0.22.5", "revision": "bf0203a794a07aac3ff764972ab9087baa4e4f4e"},
     "main": {"revision": "c11a1da27b6efdfe9c63c09955fafcc923bea41c"}

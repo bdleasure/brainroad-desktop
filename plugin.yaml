@@ -1,0 +1,10 @@
+name: brainroad
+version: 0.2.0
+description: "Computer help, browser work and coding on this computer, with a way back and a check that it worked. Optional BrainRoad phone link."
+author: BrainRoad
+license: MIT
+homepage: https://app.brainroad.com/desktop/
+tags:
+  - computer-help
+  - browser
+  - coding

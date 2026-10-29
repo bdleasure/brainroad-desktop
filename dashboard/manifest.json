@@ -1,0 +1,7 @@
+{
+  "name": "brainroad",
+  "label": "BrainRoad",
+  "description": "Computer help, browser work and coding on this computer, plus an optional BrainRoad phone link.",
+  "version": "0.2.0",
+  "api": "plugin_api.py"
+}
